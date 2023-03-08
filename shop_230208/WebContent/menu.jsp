@@ -35,6 +35,9 @@
 						out.println("<a class='navbar-brand' href='addProduct.jsp'>");
 						out.println("상품추가");
 						out.println("</a>");
+						out.println("<a class='navbar-brand' href='commitTest.jsp'>");
+						out.println("연동 테스트");
+						out.println("</a>");
 					}
 				%>
 			</div>
