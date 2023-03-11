@@ -6,7 +6,7 @@
 	request.setCharacterEncoding("utf-8");
 
 	String data = request.getParameter("data");
-	 out.println("Received data: " + data);
+	out.println("Received data: " + data);
 	
 	JDBConnect jdbc = new JDBConnect();
 		
