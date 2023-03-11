@@ -1,5 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@page import="common.JDBConnect"%>
+<%@page import="java.sql.*"%>
+<%
+	request.setCharacterEncoding("utf-8");
+
+	String data = request.getParameter("data");
+	 out.println("Received data: " + data);
+	
+	JDBConnect jdbc = new JDBConnect();
+		
+	String query = "INSERT INTO testtable(data) VALUES(?)";
+	PreparedStatement psmt = jdbc.con.prepareStatement(query);
+	psmt.setString(1, data);
+	ResultSet rs = psmt.executeQuery();
+	
+	jdbc.close();
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,9 +34,10 @@
 	</div>
 	
 	<div class="container">
-		<h1>GitHub에서 이클립스로 clone</h1>
-		<h1>수정 후 다시 commit & push</h1>
-		<h1>aws ubuntu에서 pull 후 톰캣으로 컴파일!</h1>
+		<h2>GitHub에서 이클립스로 clone</h2>
+		<h2>수정 후 다시 commit & push</h2>
+		<h2>aws ubuntu에서 pull 후 톰캣으로 컴파일!</h2>
+		<h2>아두이노에서 데이터 받기 : ${param.data}</h2>
 	</div>
 </body>
 </html>
