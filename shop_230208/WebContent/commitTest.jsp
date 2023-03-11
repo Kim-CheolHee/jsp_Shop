@@ -13,7 +13,7 @@
 	String query = "INSERT INTO testtable(data) VALUES(?)";
 	PreparedStatement psmt = jdbc.con.prepareStatement(query);
 	psmt.setString(1, data);
-	ResultSet rs = psmt.executeQuery();
+	psmt.executeUpdate();
 	
 	jdbc.close();
 %>
