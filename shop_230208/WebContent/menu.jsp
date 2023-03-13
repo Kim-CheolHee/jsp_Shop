@@ -38,6 +38,9 @@
 						out.println("<a class='navbar-brand' href='commitTest.jsp'>");
 						out.println("연동 테스트");
 						out.println("</a>");
+						out.println("<a class='navbar-brand' href='responseTest.jsp'>");
+						out.println("아두이노로 값 보내기");
+						out.println("</a>");
 					}
 				%>
 			</div>
