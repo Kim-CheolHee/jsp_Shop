@@ -6,8 +6,6 @@
 	request.setCharacterEncoding("utf-8");
 
 	String data = request.getParameter("data");
-	out.println("Received data: " + data);
-	
 	JDBConnect jdbc = new JDBConnect();
 		
 	String query = "INSERT INTO testtable(data) VALUES(?)";
@@ -15,6 +13,15 @@
 	psmt.setString(1, data);
 	psmt.executeUpdate();
 	
+	Statement stmt = jdbc.con.createStatement();
+	ResultSet rs = stmt.executeQuery("SELECT data FROM testtable ORDER BY id DESC LIMIT 1");
+
+	// Retrieve the value from the result set
+	String value = "";
+	if (rs.next()) {
+	    value = rs.getString("data");
+	}
+	out.print("Most recent value: " + value);
 	jdbc.close();
 %>
 <!DOCTYPE html>
@@ -37,7 +44,7 @@
 		<h2>GitHub에서 이클립스로 clone</h2>
 		<h2>수정 후 다시 commit & push</h2>
 		<h2>aws ubuntu에서 pull 후 톰캣으로 컴파일!</h2>
-		<h2>아두이노에서 데이터 받기 : ${param.data}</h2>
+		<h2>아두이노에서 데이터 받기 : ${param.value}</h2>
 	</div>
 </body>
 </html>
