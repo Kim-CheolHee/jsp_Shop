@@ -15,7 +15,7 @@
         int blueValue = Integer.parseInt(request.getParameter("blue"));
 
         // Construct the URL and parameter string
-        String url = "http://" + ip + ":" + port + "/ledControl";
+        String url = "http://" + ip + ":" + port + "/";
         String params = "red=" + redValue + "&green=" + greenValue + "&blue=" + blueValue;
 
         // Create a connection to the Arduino and send the parameters
