@@ -4,7 +4,7 @@
 <%@page import="java.net.*" %>
 <%
     // Define the IP address and port of the Arduino
-    String ip = "192.168.0.166";
+    String ip = "192.168.0.140";
     int port = 80;
 
     // Check whether the form was submitted
@@ -52,8 +52,8 @@
         <h1>LED Control</h1>
         <form method="get" action="<%=request.getRequestURI()%>">
              Red: <input type="number" name="red" value="<%=request.getParameter("red") != null ? request.getParameter("red") : 0 %>"><br>
-            Green: <input type="number" name="green" value="<%=request.getParameter("green") != null ? request.getParameter("green") : 0 %>"><br>
-            Blue: <input type="number" name="blue" value="<%=request.getParameter("blue") != null ? request.getParameter("blue") : 0 %>"><br>
+             Green: <input type="number" name="green" value="<%=request.getParameter("green") != null ? request.getParameter("green") : 0 %>"><br>
+             Blue: <input type="number" name="blue" value="<%=request.getParameter("blue") != null ? request.getParameter("blue") : 0 %>"><br>
             <input type="submit" name="submit" value="Submit">
         </form>
     </div>
