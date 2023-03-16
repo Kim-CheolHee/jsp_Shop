@@ -40,12 +40,12 @@
 		psmt.setString(1, TEMPVALUE);
 		psmt.executeUpdate();
 	}
-	if(DETECTVALUE != null){
+//	if(DETECTVALUE != null){
 		String Iquery = "INSERT INTO MOTION(DETECTVALUE) VALUES(?)";
 		psmt = jdbc.con.prepareStatement(Iquery);
 		psmt.setString(1, DETECTVALUE);
 		psmt.executeUpdate();
-	}
+//	}
 	
 	String Squery1 = "SELECT TDSVALUE FROM TDS ORDER BY NUM DESC LIMIT 1";
 	psmt = jdbc.con.prepareStatement(Squery1);
