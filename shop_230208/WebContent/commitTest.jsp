@@ -8,16 +8,24 @@
 
 	request.setCharacterEncoding("utf-8");
 
-	String data = request.getParameter("data");
+	String TDSVALUE = request.getParameter("TDS");
+	String WATERVALUE = request.getParameter("WL");
 	String red = request.getParameter("red");
 	String green = request.getParameter("green");
 	String blue = request.getParameter("blue");
 	
 	JDBConnect jdbc = new JDBConnect();
-	if(data != null){
-		String Iquery = "INSERT INTO testtable(data) VALUES(?)";
+	
+	if(TDSVALUE != null){
+		String Iquery = "INSERT INTO TDS(TDSVALUE) VALUES(?)";
 		psmt = jdbc.con.prepareStatement(Iquery);
-		psmt.setString(1, data);
+		psmt.setString(1, TDSVALUE);
+		psmt.executeUpdate();
+	}
+	if(WATERVALUE != null){
+		String Iquery = "INSERT INTO WATERLEVEL(WATERVALUE) VALUES(?)";
+		psmt = jdbc.con.prepareStatement(Iquery);
+		psmt.setString(1, WATERVALUE);
 		psmt.executeUpdate();
 	}
 	if(red != null && green != null && blue != null){
@@ -29,18 +37,27 @@
 		psmt.executeUpdate();
 	}
 	
-	String Squery1 = "SELECT data FROM testtable ORDER BY id DESC LIMIT 1";
+	String Squery1 = "SELECT TDSVALUE FROM TDS ORDER BY id DESC LIMIT 1";
 	psmt = jdbc.con.prepareStatement(Squery1);
 	rs = psmt.executeQuery();
 
 	// Retrieve the value from the result set
-	String value1 = "";
+	String RSTDSVALUE = "";
 	if (rs.next()) {
-	    value1 = rs.getString("data");
+		RSTDSVALUE = rs.getString("TDSVALUE");
+	}
+	String Squery2 = "SELECT WATERVALUE FROM WATERLEVEL ORDER BY id DESC LIMIT 1";
+	psmt = jdbc.con.prepareStatement(Squery2);
+	rs = psmt.executeQuery();
+
+	// Retrieve the value from the result set
+	String RSWATERVALUE = "";
+	if (rs.next()) {
+		RSWATERVALUE = rs.getString("WATERVALUE");
 	}
 	
-	String Squery2 = "SELECT * FROM rgb ORDER BY num DESC LIMIT 1";
-	psmt = jdbc.con.prepareStatement(Squery2);
+	String Squery3 = "SELECT * FROM rgb ORDER BY num DESC LIMIT 1";
+	psmt = jdbc.con.prepareStatement(Squery3);
 	rs = psmt.executeQuery();
 
 	// Retrieve the value from the result set
@@ -72,10 +89,9 @@
 	</div>
 	
 	<div class="container">
-		<h2>GitHub에서 이클립스로 clone</h2>
-		<h2>수정 후 다시 commit & push</h2>
-		<h2>aws ubuntu에서 pull 후 톰캣으로 컴파일!</h2>
-		<h3>아두이노에서 데이터 받기 : <%= value1 %></h3>
+		<h3>아두이노에서 데이터 받기</h3>
+		<h3>TDSVALUE : <%= RSTDSVALUE %></h3>
+		<h3>WATERVALUE : <%= RSWATERVALUE %></h3>
 		<h3>red : <%= valueRed %></h3>
 		<h3>green : <%= valueGreen %></h3>
 		<h3>blue : <%= valueBlue %></h3>
