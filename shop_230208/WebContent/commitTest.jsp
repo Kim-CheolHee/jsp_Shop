@@ -10,9 +10,9 @@
 
 	String TDSVALUE = request.getParameter("TDS");
 	String WATERVALUE = request.getParameter("WL");
-	String red = request.getParameter("red");
-	String green = request.getParameter("green");
-	String blue = request.getParameter("blue");
+	String PHVALUE = request.getParameter("PH");
+	String TEMPVALUE = request.getParameter("TMP");
+	String DETECTVALUE = request.getParameter("MT");
 	
 	JDBConnect jdbc = new JDBConnect();
 	
@@ -28,12 +28,22 @@
 		psmt.setString(1, WATERVALUE);
 		psmt.executeUpdate();
 	}
-	if(red != null && green != null && blue != null){
-		String Iquery = "INSERT INTO rgb(red, green, blue) VALUES(?, ?, ?)";
+	if(PHVALUE != null){
+		String Iquery = "INSERT INTO PH(PHVALUE) VALUES(?)";
 		psmt = jdbc.con.prepareStatement(Iquery);
-		psmt.setString(1, red);
-		psmt.setString(2, green);
-		psmt.setString(3, blue);
+		psmt.setString(1, PHVALUE);
+		psmt.executeUpdate();
+	}
+	if(TEMPVALUE != null){
+		String Iquery = "INSERT INTO TEMPERATURE(TEMPVALUE) VALUES(?)";
+		psmt = jdbc.con.prepareStatement(Iquery);
+		psmt.setString(1, TEMPVALUE);
+		psmt.executeUpdate();
+	}
+	if(DETECTVALUE != null){
+		String Iquery = "INSERT INTO MOTION(DETECTVALUE) VALUES(?)";
+		psmt = jdbc.con.prepareStatement(Iquery);
+		psmt.setString(1, DETECTVALUE);
 		psmt.executeUpdate();
 	}
 	
@@ -44,7 +54,6 @@
 	if (rs.next()) {
 		RSTDSVALUE = rs.getString("TDSVALUE");
 	}
-	
 	String Squery2 = "SELECT WATERVALUE FROM WATERLEVEL ORDER BY NUM DESC LIMIT 1";
 	psmt = jdbc.con.prepareStatement(Squery2);
 	rs = psmt.executeQuery();
@@ -52,17 +61,26 @@
 	if (rs.next()) {
 		RSWATERVALUE = rs.getString("WATERVALUE");
 	}
-	
-	String Squery3 = "SELECT * FROM rgb ORDER BY num DESC LIMIT 1";
+	String Squery3 = "SELECT PHVALUE FROM PH ORDER BY NUM DESC LIMIT 1";
 	psmt = jdbc.con.prepareStatement(Squery3);
 	rs = psmt.executeQuery();
-	String valueRed = "";
-	String valueGreen = "";
-	String valueBlue = "";
+	String RSPHVALUE = "";
 	if (rs.next()) {
-		valueRed = rs.getString("red");
-		valueGreen = rs.getString("green");
-		valueBlue = rs.getString("blue");
+		RSPHVALUE = rs.getString("PHVALUE");
+	}
+	String Squery4 = "SELECT TEMPVALUE FROM TEMPERATURE ORDER BY NUM DESC LIMIT 1";
+	psmt = jdbc.con.prepareStatement(Squery4);
+	rs = psmt.executeQuery();
+	String RSTEMPVALUE = "";
+	if (rs.next()) {
+		RSTEMPVALUE = rs.getString("TEMPVALUE");
+	}
+	String Squery5 = "SELECT DETECTVALUE FROM MOTION ORDER BY NUM DESC LIMIT 1";
+	psmt = jdbc.con.prepareStatement(Squery5);
+	rs = psmt.executeQuery();
+	String RSDETECTVALUE = "";
+	if (rs.next()) {
+		RSDETECTVALUE = rs.getString("DETECTVALUE");
 	}
 
 	jdbc.close();
@@ -87,9 +105,9 @@
 		<h3>아두이노에서 데이터 받기</h3>
 		<h3>TDSVALUE : <%= RSTDSVALUE %></h3>
 		<h3>WATERVALUE : <%= RSWATERVALUE %></h3>
-		<h3>red : <%= valueRed %></h3>
-		<h3>green : <%= valueGreen %></h3>
-		<h3>blue : <%= valueBlue %></h3>
+		<h3>PHVALUE : <%= RSPHVALUE %></h3>
+		<h3>TEMPVALUE : <%= RSTEMPVALUE %></h3>
+		<h3>DETECTVALUE : <%= RSDETECTVALUE %></h3>
 	</div>
 </body>
 </html>
