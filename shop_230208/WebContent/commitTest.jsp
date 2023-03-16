@@ -37,20 +37,17 @@
 		psmt.executeUpdate();
 	}
 	
-	String Squery1 = "SELECT TDSVALUE FROM TDS ORDER BY id DESC LIMIT 1";
+	String Squery1 = "SELECT TDSVALUE FROM TDS ORDER BY NUM DESC LIMIT 1";
 	psmt = jdbc.con.prepareStatement(Squery1);
 	rs = psmt.executeQuery();
-
-	// Retrieve the value from the result set
 	String RSTDSVALUE = "";
 	if (rs.next()) {
 		RSTDSVALUE = rs.getString("TDSVALUE");
 	}
-	String Squery2 = "SELECT WATERVALUE FROM WATERLEVEL ORDER BY id DESC LIMIT 1";
+	
+	String Squery2 = "SELECT WATERVALUE FROM WATERLEVEL ORDER BY NUM DESC LIMIT 1";
 	psmt = jdbc.con.prepareStatement(Squery2);
 	rs = psmt.executeQuery();
-
-	// Retrieve the value from the result set
 	String RSWATERVALUE = "";
 	if (rs.next()) {
 		RSWATERVALUE = rs.getString("WATERVALUE");
@@ -59,8 +56,6 @@
 	String Squery3 = "SELECT * FROM rgb ORDER BY num DESC LIMIT 1";
 	psmt = jdbc.con.prepareStatement(Squery3);
 	rs = psmt.executeQuery();
-
-	// Retrieve the value from the result set
 	String valueRed = "";
 	String valueGreen = "";
 	String valueBlue = "";
