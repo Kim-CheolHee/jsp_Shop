@@ -4,7 +4,7 @@
 <%@page import="java.net.*" %>
 <%
     // Define the IP address and port of the Arduino
-    String ip = "192.168.0.140";
+    String ip = "192.168.0.166";
     int port = 80;
 
     // Check whether the form was submitted

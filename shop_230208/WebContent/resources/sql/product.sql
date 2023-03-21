@@ -28,7 +28,7 @@ create table board(
     regist_day varchar(30),
     hit integer,
     ip varchar(20),
-	primary key(id)
+	primary key(num)
 );
 
 insert into product values('P1234','iPhone 14promax',2000000,'6.7-inch, super-oled디스플레이,4800만 화소','스마트폰','애플',20000,'신상품','P1234.PNG');
